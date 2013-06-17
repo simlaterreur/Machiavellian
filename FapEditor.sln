@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FapEditor", "FapEditor\FapEditor.csproj", "{548DBC44-7D85-4709-8C0B-317D958CD63B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FapWrappers", "FapWrappers\FapWrappers.vcxproj", "{52DB95A4-12D0-4377-A344-5B413D6B0F91}"
+	ProjectSection(ProjectDependencies) = postProject
+		{154812B8-FB27-4F12-9C1B-4D513688E40B} = {154812B8-FB27-4F12-9C1B-4D513688E40B}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FapEngine", "FapEngine\FapEngine.vcxproj", "{154812B8-FB27-4F12-9C1B-4D513688E40B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{548DBC44-7D85-4709-8C0B-317D958CD63B}.Debug|x64.ActiveCfg = Debug|x64
+		{548DBC44-7D85-4709-8C0B-317D958CD63B}.Debug|x64.Build.0 = Debug|x64
+		{548DBC44-7D85-4709-8C0B-317D958CD63B}.Release|x64.ActiveCfg = Release|x64
+		{548DBC44-7D85-4709-8C0B-317D958CD63B}.Release|x64.Build.0 = Release|x64
+		{52DB95A4-12D0-4377-A344-5B413D6B0F91}.Debug|x64.ActiveCfg = Debug|x64
+		{52DB95A4-12D0-4377-A344-5B413D6B0F91}.Debug|x64.Build.0 = Debug|x64
+		{52DB95A4-12D0-4377-A344-5B413D6B0F91}.Release|x64.ActiveCfg = Release|x64
+		{52DB95A4-12D0-4377-A344-5B413D6B0F91}.Release|x64.Build.0 = Release|x64
+		{154812B8-FB27-4F12-9C1B-4D513688E40B}.Debug|x64.ActiveCfg = Debug|x64
+		{154812B8-FB27-4F12-9C1B-4D513688E40B}.Debug|x64.Build.0 = Debug|x64
+		{154812B8-FB27-4F12-9C1B-4D513688E40B}.Release|x64.ActiveCfg = Release|x64
+		{154812B8-FB27-4F12-9C1B-4D513688E40B}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

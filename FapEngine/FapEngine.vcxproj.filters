@@ -18,9 +18,15 @@
     <ClInclude Include="engine\engineloop.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="gameobject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="engine\engineloop.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gameobject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

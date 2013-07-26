@@ -123,9 +123,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="engine\engineloop.h" />
+    <ClInclude Include="gameobject.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="engine\engineloop.cpp" />
+    <ClCompile Include="gameobject.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

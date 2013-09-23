@@ -1,0 +1,16 @@
+15 32
+- teleport (0,0) 1 1
+- teleport_end (32,0) 2 0
+- idle (96,0) 1 1
+- idle_blink (128,0) 1 0
+- run_start (0,32) 1 0
+- run (32,32) 4 1
+- idle_shoot (0,64) 1 0
+- run_shoot (32,64) 4 1
+- slide (0,96) 1 1
+- air (32,96) 1 1
+- air_shoot (64,96) 1 1
+- hurt (96,96) 2 1
+- climb (0,128) 2 1
+- climb_end (64,128) 1 1
+- climb_shoot (96,128) 1 1

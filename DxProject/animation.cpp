@@ -14,7 +14,7 @@ Animation::Animation() :
 
 bool Animation::isCompleted() const
 {
-    return false;
+    return m_finished;
 }
 
 bool Animation::operator < (const Animation & a) const
@@ -43,11 +43,11 @@ RECT Animation::getCurrentFrame() const
 {
     RECT rectangle;
 
-    rectangle.top = m_startFrameCorner.first;
-    rectangle.left = m_startFrameCorner.second + (m_frameSize * (m_currentFrame-1));
-
-    rectangle.bottom = m_startFrameCorner.first + m_frameSize - 1;
-    rectangle.right = m_startFrameCorner.second + (m_frameSize * m_currentFrame) - 1;
+    rectangle.left = m_startFrameCorner.first + (m_frameSize * (m_currentFrame-1));
+    rectangle.top = m_startFrameCorner.second;
+    
+    rectangle.right = m_startFrameCorner.first + (m_frameSize * m_currentFrame) - 1;
+    rectangle.bottom = m_startFrameCorner.second + m_frameSize - 1;
 
     return rectangle;
 }

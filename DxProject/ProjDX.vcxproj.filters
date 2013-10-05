@@ -13,6 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\managers">
+      <UniqueIdentifier>{6c9c1b1e-4862-4cc7-8b21-10b9f6c9eac7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gamespecific">
+      <UniqueIdentifier>{bd08e2f6-c918-48e4-b218-e042f72d9831}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\managers">
+      <UniqueIdentifier>{898ebb47-578f-4420-be59-223a02151ca3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gamespecific">
+      <UniqueIdentifier>{43d8b266-6717-4f86-a124-96895560ed8b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -23,6 +35,12 @@
     </ClCompile>
     <ClCompile Include="animation.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="playablecharacter.cpp">
+      <Filter>Source Files\gamespecific</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -37,6 +55,12 @@
     </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="playablecharacter.h">
+      <Filter>Header Files\gamespecific</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

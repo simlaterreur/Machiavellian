@@ -1,12 +1,13 @@
 #include "main.h"
 #include "entity.h"
+#include "game.h"
 
 // global declarations
 LPDIRECT3D9 d3d;    // the pointer to our Direct3D interface
 LPDIRECT3DDEVICE9 d3ddev;    // the pointer to the device class
 
 LPD3DXSPRITE sprite;
-Entity * megaman;
+Game * game;
 
 // the entry point for any Windows program
 int WINAPI WinMain(HINSTANCE hInstance,
@@ -34,7 +35,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
                           "DirectX project",
                           WS_OVERLAPPEDWINDOW,
                           300, 300,
-                          800, 600,
+                          320, 320,
                           NULL,
                           NULL,
                           hInstance,
@@ -48,9 +49,9 @@ int WINAPI WinMain(HINSTANCE hInstance,
     // **************************************************
     sprite = NULL;
     D3DXCreateSprite(d3ddev, &sprite);
-
-    megaman = new Entity();
-    megaman->init(d3ddev, "MegaMan");
+    
+    game = new Game();
+    game->loadMap("default", d3ddev);
 
     // **************************************************
 
@@ -72,7 +73,8 @@ int WINAPI WinMain(HINSTANCE hInstance,
 
         long int end = GetTickCount();
         long int elapsed = end - start;
-        megaman->update(elapsed);
+
+        game->update(elapsed);
 
         render_frame();
 
@@ -82,7 +84,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
     // clean up DirectX and COM
     cleanD3D();
 
-    delete megaman;
+    delete game;
 
     return msg.wParam;
 }
@@ -128,6 +130,8 @@ void initD3D(HWND hWnd)
 
 
 // this is the function used to render a single frame
+
+// TODO: refactor
 void render_frame(void)
 {
 
@@ -141,7 +145,7 @@ void render_frame(void)
     sprite->Begin(D3DXSPRITE_ALPHABLEND);
     
     // render all gameplay objects
-    megaman->render(sprite); // TO REFACTOR
+    game->render(sprite);
 
     sprite->End();
 

@@ -1,6 +1,6 @@
 #include "entity.h"
 
-Entity::Entity() : m_pos(0,0,0), m_currentAnim(0)
+Entity::Entity() : m_pos(0,0,0), m_currentAnim(0), m_visible(false)
 {
     m_texture = NULL;
 }
@@ -73,6 +73,7 @@ void Entity::update(long int elapsed)
 
 void Entity::render(const LPD3DXSPRITE& sprite) const
 {
+    if (!m_visible) return;
     RECT rectangle = m_animList[m_currentAnim].getCurrentFrame();
     sprite->Draw(m_texture, &rectangle, NULL, &m_pos, 0xFFFFFFFF);
 }

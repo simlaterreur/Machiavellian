@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 
-#define TIME_BETWEEN_ANIM_UPDATES 180
+#define TIME_BETWEEN_ANIM_UPDATES 140 // à trouver le sweet spot
 
 class Animation
 {

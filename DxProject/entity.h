@@ -18,14 +18,16 @@ public:
     void init(const LPDIRECT3DDEVICE9&, const std::string&);
     
     void setCurrentAnimation(const std::string&);
-    void update(long int elapsed);
+
+    virtual void update(long int elapsed);
     void render(const LPD3DXSPRITE&) const;
 
-private:
+protected:
     D3DXVECTOR3 m_pos;
     LPDIRECT3DTEXTURE9 m_texture;
 
     std::map<std::string, int> m_animIndex;
     std::vector<Animation> m_animList;
     int m_currentAnim;
+    bool m_visible;
 };

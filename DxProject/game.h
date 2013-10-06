@@ -19,5 +19,6 @@ public:
 
 private:
 
+    std::set<Entity_ptr> background;
     std::set<Entity_ptr> gameobjectlist;
 };

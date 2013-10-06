@@ -1,6 +1,6 @@
 #include "entity.h"
 
-Entity::Entity() : m_pos(0,0,0), m_currentAnim(0), m_visible(false)
+Entity::Entity() : m_pos(0,0,0), m_currentAnim(0), m_visible(true)
 {
     m_texture = NULL;
 }
@@ -64,6 +64,12 @@ void Entity::setCurrentAnimation(const std::string& animName)
         // error message
         return;
     }
+}
+
+void Entity::setPosition(int x, int y)
+{
+    m_pos.x = x;
+    m_pos.y = y;
 }
 
 void Entity::update(long int elapsed)

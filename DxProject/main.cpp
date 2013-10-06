@@ -51,7 +51,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
     D3DXCreateSprite(d3ddev, &sprite);
     
     game = new Game();
-    game->loadMap("default", d3ddev);
+    game->loadMap("Gym", d3ddev);
 
     // **************************************************
 

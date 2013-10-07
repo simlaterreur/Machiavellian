@@ -18,6 +18,7 @@ public:
     void init(const LPDIRECT3DDEVICE9&, const std::string&);
     
     void setCurrentAnimation(const std::string&);
+    void setCurrentAnimation(const std::string&, int);
     void setPosition(int, int);
 
     virtual void update(long int elapsed);

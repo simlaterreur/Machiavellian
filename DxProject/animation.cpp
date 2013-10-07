@@ -43,11 +43,11 @@ RECT Animation::getCurrentFrame() const
 {
     RECT rectangle;
 
-    rectangle.left = m_startFrameCorner.first + (m_frameSize * (m_currentFrame-1));
+    rectangle.left = m_startFrameCorner.first + (m_frameSize * (m_currentFrame - 1));
     rectangle.top = m_startFrameCorner.second;
     
-    rectangle.right = m_startFrameCorner.first + (m_frameSize * m_currentFrame) - 1;
-    rectangle.bottom = m_startFrameCorner.second + m_frameSize - 1;
+    rectangle.right = m_startFrameCorner.first + (m_frameSize * m_currentFrame);
+    rectangle.bottom = m_startFrameCorner.second + m_frameSize;
 
     return rectangle;
 }

@@ -66,6 +66,12 @@ void Entity::setCurrentAnimation(const std::string& animName)
     }
 }
 
+void Entity::setCurrentAnimation(const std::string& animName, int offSetFrame)
+{
+    this->setCurrentAnimation(animName);
+    m_animList[m_currentAnim].m_currentFrame += offSetFrame;
+}
+
 void Entity::setPosition(int x, int y)
 {
     m_pos.x = x;

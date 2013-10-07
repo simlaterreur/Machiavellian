@@ -41,6 +41,7 @@ void Game::loadMap(const std::string& mapName, const LPDIRECT3DDEVICE9& d3ddev)
     // manually adding stuff in the meantime
     Entity_ptr megaman(new PlayableCharacter);
     megaman->init(d3ddev, "MegaMan");
+    megaman->setPosition(16,192);
     gameobjectlist.insert(megaman);
 
     // TRÈSSSSSS TEMP
@@ -62,17 +63,18 @@ void Game::loadMap(const std::string& mapName, const LPDIRECT3DDEVICE9& d3ddev)
         {
             std::string animName;
             *entree >> animName;
-            //if(!(*entree) || animName == "-") break;
+            int animOffset;
+            *entree >> animOffset;
             Entity_ptr entity(new Entity);
             entity->init(d3ddev, mapName);
             entity->setPosition(j*16, i*16);
-            entity->setCurrentAnimation(animName);
+            entity->setCurrentAnimation(animName, animOffset);
             background.insert(entity);
             // OMG, c'est tellement laid
         }
     }
 
-    delete entree;
+    //delete entree;
 
     // *********************************
 }

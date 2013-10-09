@@ -13,15 +13,16 @@ Entity::Entity(const Entity& e) : m_pos(e.m_pos)
 
 Entity::~Entity()
 {
-    if (m_texture != NULL)
-        m_texture->Release();
+    /*if (m_texture != NULL)
+        m_texture->Release();*/
 }
 
 void Entity::init(const LPDIRECT3DDEVICE9& device, const std::string& name)
 {
     // create texture
-    std::string texturePath = "./Resources/" + name + ".png";
-    D3DXCreateTextureFromFile(device, texturePath.c_str(), &m_texture);
+    //std::string texturePath = "./Resources/" + name + ".png";
+    //D3DXCreateTextureFromFile(device, texturePath.c_str(), &m_texture);
+    m_texture = ResourcesManager::getInstance().loadResourceTexture(device, name);
 
     // create anim list
     std::string animPath = "./Resources/" + name + ".anim";
@@ -72,7 +73,7 @@ void Entity::setCurrentAnimation(const std::string& animName, int offSetFrame)
     m_animList[m_currentAnim].m_currentFrame += offSetFrame;
 }
 
-void Entity::setPosition(int x, int y)
+void Entity::setPosition(float x, float y)
 {
     m_pos.x = x;
     m_pos.y = y;
@@ -87,6 +88,6 @@ void Entity::render(const LPD3DXSPRITE& sprite) const
 {
     if (!m_visible) return;
     RECT rectangle = m_animList[m_currentAnim].getCurrentFrame();
-    sprite->Draw(m_texture, &rectangle, NULL, &m_pos, 0xFFFFFFFF);
+    sprite->Draw(m_texture->getTexture(), &rectangle, NULL, &m_pos, 0xFFFFFFFF);
 }
 

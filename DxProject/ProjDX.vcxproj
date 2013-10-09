@@ -67,16 +67,22 @@
   <ItemGroup>
     <ClCompile Include="animation.cpp" />
     <ClCompile Include="entity.cpp" />
+    <ClCompile Include="entityfactory.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="playablecharacter.cpp" />
+    <ClCompile Include="resources.cpp" />
+    <ClCompile Include="resourcesmanager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation.h" />
     <ClInclude Include="entity.h" />
+    <ClInclude Include="entityfactory.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="playablecharacter.h" />
+    <ClInclude Include="resourcesmanager.h" />
+    <ClInclude Include="resources.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -67,7 +67,7 @@ void Game::loadMap(const std::string& mapName, const LPDIRECT3DDEVICE9& d3ddev)
             *entree >> animOffset;
             Entity_ptr entity(new Entity);
             entity->init(d3ddev, mapName);
-            entity->setPosition(j*16, i*16);
+            entity->setPosition(j*16.0f, i*16.0f);
             entity->setCurrentAnimation(animName, animOffset);
             background.insert(entity);
             // OMG, c'est tellement laid

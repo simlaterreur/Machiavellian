@@ -5,8 +5,6 @@
 #include <set>
 #include <memory>
 
-typedef std::shared_ptr<Entity> Entity_ptr;
-
 class Game
 {
 public:

@@ -11,10 +11,10 @@ class Animation
 public:
     Animation();
 
-    bool isCompleted() const;
+    bool Completed() const;
 
-    void updateAnimation(long int);
-    RECT getCurrentFrame() const;
+    void UpdateAnimation(long int);
+    RECT GetCurrentFrame() const;
 
     bool operator < (const Animation &) const;
 

@@ -66,6 +66,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="animation.cpp" />
+    <ClCompile Include="controlmanager.cpp" />
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="entityfactory.cpp" />
     <ClCompile Include="game.cpp" />
@@ -76,6 +77,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation.h" />
+    <ClInclude Include="controlmanager.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="entityfactory.h" />
     <ClInclude Include="game.h" />

@@ -9,13 +9,13 @@ void Game::update(long int elapsed)
     std::set<Entity_ptr>::iterator iter = background.begin();
     for (; iter != background.end(); ++iter)
     {
-        (*iter)->update(elapsed);
+        (*iter)->Update(elapsed);
     }
 
     iter = gameobjectlist.begin();
     for (; iter != gameobjectlist.end(); ++iter)
     {
-        (*iter)->update(elapsed);
+        (*iter)->Update(elapsed);
     }
 }
 
@@ -24,13 +24,13 @@ void Game::render(const LPD3DXSPRITE& sprite)
     std::set<Entity_ptr>::iterator iter = background.begin();
     for (; iter != background.end(); ++iter)
     {
-        (*iter)->render(sprite);
+        (*iter)->Render(sprite);
     }
 
     iter = gameobjectlist.begin();
     for (; iter != gameobjectlist.end(); ++iter)
     {
-        (*iter)->render(sprite);
+        (*iter)->Render(sprite);
     }
 }
 
@@ -40,8 +40,8 @@ void Game::loadMap(const std::string& mapName, const LPDIRECT3DDEVICE9& d3ddev)
     
     // manually adding stuff in the meantime
     Entity_ptr megaman(new PlayableCharacter);
-    megaman->init(d3ddev, "MegaMan");
-    megaman->setPosition(16,192);
+    megaman->Init(d3ddev, "MegaMan");
+    megaman->SetPosition(200,192);
     gameobjectlist.insert(megaman);
 
     // TRÈSSSSSS TEMP
@@ -66,9 +66,9 @@ void Game::loadMap(const std::string& mapName, const LPDIRECT3DDEVICE9& d3ddev)
             int animOffset;
             *entree >> animOffset;
             Entity_ptr entity(new Entity);
-            entity->init(d3ddev, mapName);
-            entity->setPosition(j*16.0f, i*16.0f);
-            entity->setCurrentAnimation(animName, animOffset);
+            entity->Init(d3ddev, mapName);
+            entity->SetPosition(j*16.0f, i*16.0f);
+            entity->SetCurrentAnimation(animName, animOffset);
             background.insert(entity);
             // OMG, c'est tellement laid
         }

@@ -12,7 +12,7 @@ Animation::Animation() :
     m_name = "";
 }
 
-bool Animation::isCompleted() const
+bool Animation::Completed() const
 {
     return m_finished;
 }
@@ -22,7 +22,7 @@ bool Animation::operator < (const Animation & a) const
     return m_name < a.m_name;
 }
 
-void Animation::updateAnimation (long int elapsed)
+void Animation::UpdateAnimation (long int elapsed)
 {
     m_lastUpdate += elapsed;
 
@@ -39,7 +39,7 @@ void Animation::updateAnimation (long int elapsed)
     }
 }
 
-RECT Animation::getCurrentFrame() const
+RECT Animation::GetCurrentFrame() const
 {
     RECT rectangle;
 

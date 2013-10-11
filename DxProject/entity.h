@@ -18,17 +18,18 @@ public:
     Entity(const Entity&);
     ~Entity();
     
-    void setCurrentAnimation(const std::string&);
-    void setCurrentAnimation(const std::string&, int);
-    void setPosition(float, float);
+    void SetCurrentAnimation(const std::string&);
+    void SetCurrentAnimation(const std::string&, int);
+    void SetPosition(float, float);
 
-    virtual void update(long int elapsed);
-    void render(const LPD3DXSPRITE&) const;
+    virtual void Update(long int elapsed);
+    void Render(const LPD3DXSPRITE&) const;
 
-    void init(const LPDIRECT3DDEVICE9&, const std::string&);
+    void Init(const LPDIRECT3DDEVICE9&, const std::string&);
 
 protected:
-    D3DXVECTOR3 m_pos;
+    //D3DXVECTOR3 m_pos;
+    std::pair<float, float> m_pos;
     Texture_ptr m_texture;
     //LPDIRECT3DTEXTURE9 m_texture;
 
@@ -36,6 +37,7 @@ protected:
     std::vector<Animation> m_animList;
     int m_currentAnim;
     bool m_visible;
+    bool m_facingLeft;
 
 private:
 

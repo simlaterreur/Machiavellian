@@ -1,11 +1,11 @@
 #include "main.h"
 #include "entity.h"
 #include "game.h"
+#include "controlmanager.h"
 
 // global declarations
 LPDIRECT3D9 d3d;    // the pointer to our Direct3D interface
 LPDIRECT3DDEVICE9 d3ddev;    // the pointer to the device class
-
 LPD3DXSPRITE sprite;
 Game * game;
 
@@ -50,6 +50,8 @@ int WINAPI WinMain(HINSTANCE hInstance,
     sprite = NULL;
     D3DXCreateSprite(d3ddev, &sprite);
     
+    ControlManager::getInstance().Init(hInstance, hWnd);
+
     game = new Game();
     game->loadMap("Gym", d3ddev);
 
@@ -84,6 +86,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
     // clean up DirectX and COM
     cleanD3D();
 
+    ControlManager::getInstance().Release();
     delete game;
 
     return msg.wParam;

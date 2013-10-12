@@ -62,7 +62,9 @@ void PlayableCharacter::Update(long int elapsed)
             m_previousState = m_currentState;
         }
 
-        // if slide ...
+        // if long idle
+        m_timer += elapsed;
+        if (m_timer > 3600) m_currentState = IDLE_BLINK;
 
         // if move ...
         if (m_currentInputs.left || m_currentInputs.right)
@@ -70,13 +72,15 @@ void PlayableCharacter::Update(long int elapsed)
             m_currentState = RUN;
         }
 
+        // if slide ...
+        if (m_currentInputs.down && (m_currentInputs.a && !m_previousInputs.a))
+        {
+            m_currentState = SLIDE;
+        }
+
         // if shoot ...
 
         // if jump ...
-
-        // if long idle
-        m_timer += elapsed;
-        if (m_timer > 3600) m_currentState = IDLE_BLINK;
 
         break;
 
@@ -91,6 +95,13 @@ void PlayableCharacter::Update(long int elapsed)
         {
             m_currentState = IDLE;
         }
+
+        // if move ...
+        if (m_currentInputs.left || m_currentInputs.right)
+        {
+            m_currentState = RUN;
+        }
+
         break;
 
     case RUN:
@@ -102,15 +113,21 @@ void PlayableCharacter::Update(long int elapsed)
 
         if (m_currentInputs.left)
         {
-            MoveLeft(elapsed);
+            MoveLeft(elapsed, MOVE_SPEED);
         }
         else if (m_currentInputs.right)
         {
-            MoveRight(elapsed);
+            MoveRight(elapsed, MOVE_SPEED);
         }
         else
         {
             m_currentState = IDLE;
+        }
+
+        // if slide ...
+        if (m_currentInputs.down && (m_currentInputs.a && !m_previousInputs.a))
+        {
+            m_currentState = SLIDE;
         }
 
         break;
@@ -120,19 +137,45 @@ void PlayableCharacter::Update(long int elapsed)
         break;
 
     case SLIDE:
+        if (m_currentState != m_previousState)
+        {
+            SetCurrentAnimation("slide");
+            m_timer = 0;
+            m_previousState = m_currentState;
+        }
+
+        m_timer += elapsed;
+        if (m_timer > SLIDE_TIME) m_currentState = IDLE;
+
+        if (m_currentInputs.left)
+        {
+            MoveLeft(elapsed, SLIDE_SPEED);
+        }
+        else if (m_currentInputs.right)
+        {
+            MoveRight(elapsed, SLIDE_SPEED);
+        }
+        else if (m_facingLeft)
+        {
+            MoveLeft(elapsed, SLIDE_SPEED);
+        }
+        else
+        {
+            MoveRight(elapsed, SLIDE_SPEED);
+        }
 
         break;
     }
 }
 
-void PlayableCharacter::MoveLeft(long int elapsed)
+void PlayableCharacter::MoveLeft(long int elapsed, float speed)
 {
     m_facingLeft = true;
-    m_pos.first -= elapsed * MOVE_SPEED;
+    m_pos.first -= elapsed * speed;
 }
 
-void PlayableCharacter::MoveRight(long int elapsed)
+void PlayableCharacter::MoveRight(long int elapsed, float speed)
 {
     m_facingLeft = false;
-    m_pos.first += elapsed * MOVE_SPEED;
+    m_pos.first += elapsed * speed;
 }

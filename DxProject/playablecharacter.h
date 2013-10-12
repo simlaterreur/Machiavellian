@@ -5,7 +5,8 @@
 #include "controlmanager.h"
 
 static const float MOVE_SPEED = (96.0f / 1000.0f);      // pixels per second
-static const float SLIDE_SPEED = (128.0f / 1000.0f); 
+static const float SLIDE_SPEED = (192.0f / 1000.0f); 
+static const long int SLIDE_TIME = 400; 
 
 class PlayableCharacter : public Entity
 {
@@ -22,7 +23,7 @@ private:
     ControllerState m_currentInputs;
     ControllerState m_previousInputs;
 
-    void MoveLeft(long int);
-    void MoveRight(long int);
+    void MoveLeft(long int, float);
+    void MoveRight(long int, float);
    
 };

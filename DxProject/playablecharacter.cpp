@@ -81,6 +81,10 @@ void PlayableCharacter::Update(long int elapsed)
         // if shoot ...
 
         // if jump ...
+        if (!m_currentInputs.down && (m_currentInputs.a && !m_previousInputs.a))
+        {
+            m_currentState = JUMP;
+        }
 
         break;
 
@@ -100,6 +104,20 @@ void PlayableCharacter::Update(long int elapsed)
         if (m_currentInputs.left || m_currentInputs.right)
         {
             m_currentState = RUN;
+        }
+
+        // if slide ...
+        if (m_currentInputs.down && (m_currentInputs.a && !m_previousInputs.a))
+        {
+            m_currentState = SLIDE;
+        }
+
+        // if shoot ...
+
+        // if jump ...
+        if (!m_currentInputs.down && (m_currentInputs.a && !m_previousInputs.a))
+        {
+            m_currentState = JUMP;
         }
 
         break;
@@ -130,9 +148,40 @@ void PlayableCharacter::Update(long int elapsed)
             m_currentState = SLIDE;
         }
 
+        // if jump ...
+        if (!m_currentInputs.down && (m_currentInputs.a && !m_previousInputs.a))
+        {
+            m_currentState = JUMP;
+        }
+
         break;
 
-    case JUMP:
+    case JUMP: // should be called AIR
+        if (m_currentState != m_previousState)
+        {
+            SetCurrentAnimation("air");
+            m_previousState = m_currentState;
+            m_jumpImpulsion = JUMP_IMPULSION_VALUE; // should be assigned on the transition ? What about falling
+        }
+
+        if (!m_currentInputs.a && m_jumpImpulsion > 0)
+        {
+            m_jumpImpulsion = 0;
+        }
+
+        if (m_currentInputs.left)
+        {
+            MoveLeft(elapsed, MOVE_SPEED);
+        }
+        else if (m_currentInputs.right)
+        {
+            MoveRight(elapsed, MOVE_SPEED);
+        }
+
+        if (!MoveUpDown(elapsed))
+        {
+            m_currentState = IDLE;
+        }
 
         break;
 
@@ -164,6 +213,12 @@ void PlayableCharacter::Update(long int elapsed)
             MoveRight(elapsed, SLIDE_SPEED);
         }
 
+        // if jump ...
+        if (!m_currentInputs.down && (m_currentInputs.a && !m_previousInputs.a))
+        {
+            m_currentState = JUMP;
+        }
+
         break;
     }
 }
@@ -178,4 +233,23 @@ void PlayableCharacter::MoveRight(long int elapsed, float speed)
 {
     m_facingLeft = false;
     m_pos.first += elapsed * speed;
+}
+
+bool PlayableCharacter::MoveUpDown(long int elapsed)
+{
+    m_pos.second -= elapsed * m_jumpImpulsion;
+    m_jumpImpulsion -= elapsed * JUMP_GRAVITY_VALUE;
+    if (m_jumpImpulsion < -JUMP_IMPULSION_VALUE)
+    {
+        m_jumpImpulsion = -JUMP_IMPULSION_VALUE;
+    }
+
+    // faked collision
+    if (m_pos.second >= 192)
+    {
+        m_pos.second = 192;
+        return false;
+    }
+
+    return true;
 }

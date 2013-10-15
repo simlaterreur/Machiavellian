@@ -41,7 +41,7 @@ void Game::loadMap(const std::string& mapName, const LPDIRECT3DDEVICE9& d3ddev)
     // manually adding stuff in the meantime
     Entity_ptr megaman(new PlayableCharacter);
     megaman->Init(d3ddev, "MegaMan");
-    megaman->SetPosition(32,192);
+    megaman->SetPosition(32,-32);
     gameobjectlist.insert(megaman);
 
     // TRÈSSSSSS TEMP

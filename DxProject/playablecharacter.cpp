@@ -31,13 +31,14 @@ void PlayableCharacter::Update(long int elapsed)
         if (m_currentState != m_previousState)
         {
             SetCurrentAnimation("teleport");
-            m_timer = 0;
+            m_jumpImpulsion = -JUMP_IMPULSION_VALUE;
             m_previousState = m_currentState;
         }
 
-        // temp, should be physic and transition once hits ground
-        m_timer += elapsed;
-        if (m_timer > 90) m_currentState = TELEPORT_END;
+        if (!MoveUpDown(elapsed))
+        {
+            m_currentState = TELEPORT_END;
+        }
 
         break;
 

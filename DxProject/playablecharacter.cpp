@@ -49,7 +49,7 @@ void PlayableCharacter::Update(long int elapsed)
             m_previousState = m_currentState;
         }
 
-        if (m_animList[m_currentAnim].Completed())
+        if (m_animPlayer.Completed())
         {
             m_currentState = IDLE;
         }
@@ -96,7 +96,7 @@ void PlayableCharacter::Update(long int elapsed)
             m_previousState = m_currentState;
         }
 
-        if (m_animList[m_currentAnim].Completed())
+        if (m_animPlayer.Completed())
         {
             m_currentState = IDLE;
         }

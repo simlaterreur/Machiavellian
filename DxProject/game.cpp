@@ -50,7 +50,7 @@ void Game::loadMap(const std::string& mapName, const LPDIRECT3DDEVICE9& d3ddev)
     if(entree->fail()) 
     {
         // add message erreur
-        return; //test
+        return; 
     }
 
     int x, y = 0;
@@ -74,7 +74,7 @@ void Game::loadMap(const std::string& mapName, const LPDIRECT3DDEVICE9& d3ddev)
         }
     }
 
-    //delete entree;
+    delete entree;
 
     // *********************************
 }

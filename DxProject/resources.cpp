@@ -12,7 +12,7 @@ Texture::~Texture()
         m_texture->Release();
 }
 
-void Texture::loadResource(const LPDIRECT3DDEVICE9& d3ddev, const std::string& name)
+void Texture::LoadResource(const LPDIRECT3DDEVICE9& d3ddev, const std::string& name)
 {
     m_id = name;
     std::string texturePath = "./Resources/" + name + ".png";

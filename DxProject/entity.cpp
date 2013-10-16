@@ -3,7 +3,6 @@
 
 Entity::Entity() : 
     m_pos(0.0f, 0.0f),
-    m_currentAnim(0),
     m_visible(true),
     m_facingLeft(false)
 {
@@ -23,57 +22,30 @@ Entity::~Entity()
 void Entity::Init(const LPDIRECT3DDEVICE9& device, const std::string& name)
 {
     // create texture
-    //std::string texturePath = "./Resources/" + name + ".png";
-    //D3DXCreateTextureFromFile(device, texturePath.c_str(), &m_texture);
     m_texture = ResourcesManager::getInstance().loadResourceTexture(device, name);
 
     // create anim list
-    std::string animPath = "./Resources/" + name + ".anim";
-    std::istream* entree = new std::ifstream(animPath);
-    if(entree->fail()) 
-    {
-        // add message erreur
-    }
-
-    int nbAnims;
-    (*entree) >> nbAnims;
-    m_animList.reserve(nbAnims);
-
-    int frameSize;
-    (*entree) >> frameSize;
-
-    while(*entree)
-    {
-        Animation animation;
-        *entree >> animation;
-        if(!(*entree)) break;
-        animation.m_frameSize = frameSize;
-        m_animIndex[animation.m_name] = m_animList.size();
-        m_animList.push_back(animation);
-    }
-
-    delete entree;
+    m_animPlayer.SetAnimGroup(ResourcesManager::getInstance().loadAnimationGroup(name));
 }
 
 void Entity::SetCurrentAnimation(const std::string& animName)
 {
-    try 
-    {
-        m_currentAnim = m_animIndex.at(animName);
-        m_animList[m_currentAnim].m_currentFrame = 1;
-        m_animList[m_currentAnim].m_finished = false;
-    } 
-    catch (const std::out_of_range&)
-    {
-        // error message
-        return;
-    }
+    m_animPlayer.PlayAnimation(animName);
+
+    //try 
+    //{
+    //} 
+    //catch (const std::out_of_range&)
+    //{
+    //    // error message
+    //    return;
+    //}
 }
 
 void Entity::SetCurrentAnimation(const std::string& animName, int offSetFrame)
 {
-    this->SetCurrentAnimation(animName);
-    m_animList[m_currentAnim].m_currentFrame += offSetFrame;
+    m_animPlayer.PlayAnimation(animName);
+    m_animPlayer.SetAnimationOffset(offSetFrame);
 }
 
 void Entity::SetPosition(float x, float y)
@@ -84,13 +56,13 @@ void Entity::SetPosition(float x, float y)
 
 void Entity::Update(long int elapsed)
 {
-    m_animList[m_currentAnim].UpdateAnimation(elapsed);
+    m_animPlayer.UpdateAnimation(elapsed);
 }
 
 void Entity::Render(const LPD3DXSPRITE& sprite) const
 {
     if (!m_visible) return;
-    RECT rectangle = m_animList[m_currentAnim].GetCurrentFrame();
+    RECT rectangle = m_animPlayer.GetCurrentFrame();
 
     D3DXVECTOR3 pos(floor(m_pos.first), floor(m_pos.second), 0.0f); // rounds the position to the pixel (avoids smudging effect when in between pixels)
 

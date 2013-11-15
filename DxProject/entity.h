@@ -1,6 +1,5 @@
 #pragma once
 
-#include "stdafx.h"
 #include "animation.h"
 #include <iostream>
 #include <fstream>
@@ -23,9 +22,9 @@ public:
     void SetPosition(float, float);
 
     virtual void Update(long int elapsed);
-    void Render(const LPD3DXSPRITE&) const;
+    void Render() const;
 
-    void Init(const LPDIRECT3DDEVICE9&, const std::string&);
+    void Init(const std::string&);
 
 protected:
     std::pair<float, float> m_pos;

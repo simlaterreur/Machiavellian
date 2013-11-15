@@ -1,4 +1,5 @@
 #include "entity.h"
+#include "graphicsmanager.h"
 #include <math.h>
 
 Entity::Entity() : 
@@ -19,10 +20,10 @@ Entity::~Entity()
 {
 }
 
-void Entity::Init(const LPDIRECT3DDEVICE9& device, const std::string& name)
+void Entity::Init(const std::string& name)
 {
     // create texture
-    m_texture = ResourcesManager::getInstance().loadResourceTexture(device, name);
+    m_texture = ResourcesManager::getInstance().loadResourceTexture(name);
 
     // create anim list
     m_animPlayer.SetAnimGroup(ResourcesManager::getInstance().loadAnimationGroup(name));
@@ -59,25 +60,24 @@ void Entity::Update(long int elapsed)
     m_animPlayer.UpdateAnimation(elapsed);
 }
 
-void Entity::Render(const LPD3DXSPRITE& sprite) const
+void Entity::Render() const
 {
     if (!m_visible) return;
     RECT rectangle = m_animPlayer.GetCurrentFrame();
 
     D3DXVECTOR3 pos(floor(m_pos.first), floor(m_pos.second), 0.0f); // rounds the position to the pixel (avoids smudging effect when in between pixels)
 
-    D3DXMATRIX trans;
+    D3DXMATRIX transformation;
     if (m_facingLeft)
     {
-        D3DXMatrixScaling(&trans, -1.0f, 1.0f, 1.0f);
+        D3DXMatrixScaling(&transformation, -1.0f, 1.0f, 1.0f);
         pos.x = -pos.x - 32; // TEMP offset 32 (sprite width) vu que la pos du sprite n'est pas au centre mais le top left corner
     }
     else
     {
-        D3DXMatrixScaling(&trans, 1.0f, 1.0f, 1.0f);
+        D3DXMatrixScaling(&transformation, 1.0f, 1.0f, 1.0f);
     }
 
-    sprite->SetTransform(&trans);  // TODO: pourrait tout mettre le positionnement dans la matrice de transformation sans avoir besoin d'utiliser le vecteur pos.
-    sprite->Draw(m_texture->getTexture(), &rectangle, NULL, &pos, 0xFFFFFFFF);
+    GraphicsManager::getInstance().Draw(m_texture->getTexture(), rectangle, pos, transformation);
 }
 

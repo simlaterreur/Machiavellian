@@ -16,7 +16,7 @@ public:
         return instance;
     }
 
-    Texture_ptr loadResourceTexture(const LPDIRECT3DDEVICE9&, const std::string&);
+    Texture_ptr loadResourceTexture(const std::string&);
     std::shared_ptr<AnimationGroup> loadAnimationGroup(const std::string&);
 
     void emptyCache();

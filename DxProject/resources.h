@@ -7,7 +7,7 @@
 class Resource
 {
 public:
-    virtual void LoadResource(const LPDIRECT3DDEVICE9& d3ddev, const std::string& name) = 0;
+    virtual void LoadResource(const std::string& name) = 0;
 };
 
 class Texture : public Resource
@@ -16,7 +16,7 @@ public:
     Texture();
     ~Texture();
 
-    virtual void LoadResource(const LPDIRECT3DDEVICE9& d3ddev, const std::string& name);
+    virtual void LoadResource(const std::string& name);
     LPDIRECT3DTEXTURE9 getTexture() const;
 
     bool operator< (const Texture&);

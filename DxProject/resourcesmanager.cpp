@@ -1,7 +1,7 @@
 #include "resourcesmanager.h"
 #include <string>
 
-Texture_ptr ResourcesManager::loadResourceTexture(const LPDIRECT3DDEVICE9& d3ddev, const std::string& name)
+Texture_ptr ResourcesManager::loadResourceTexture(const std::string& name)
 {
     // check first if resource is already loaded
     std::map<std::string, int>::iterator iter = m_cacheIndex.find(name);
@@ -15,7 +15,7 @@ Texture_ptr ResourcesManager::loadResourceTexture(const LPDIRECT3DDEVICE9& d3dde
 
     // if not, load new resource
     Texture_ptr resource(new Texture);
-    resource->LoadResource(d3ddev, name);
+    resource->LoadResource(name);
     m_cacheIndex[name] = m_resourcesCache.size();
     m_resourcesCache.push_back(resource);
     return resource;

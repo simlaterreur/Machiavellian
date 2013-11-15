@@ -1,4 +1,5 @@
 #include "resources.h"
+#include "graphicsmanager.h"
 
 Texture::Texture()
 {
@@ -12,11 +13,11 @@ Texture::~Texture()
         m_texture->Release();
 }
 
-void Texture::LoadResource(const LPDIRECT3DDEVICE9& d3ddev, const std::string& name)
+void Texture::LoadResource(const std::string& name)
 {
     m_id = name;
     std::string texturePath = "./Resources/" + name + ".png";
-    D3DXCreateTextureFromFile(d3ddev, texturePath.c_str(), &m_texture);
+    GraphicsManager::getInstance().CreateTexture(texturePath, &m_texture);
 }
 
 LPDIRECT3DTEXTURE9 Texture::getTexture() const

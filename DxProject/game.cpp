@@ -1,4 +1,5 @@
 #include "game.h"
+#include "graphicsmanager.h"
 
 Game::Game()
 {
@@ -19,28 +20,32 @@ void Game::update(long int elapsed)
     }
 }
 
-void Game::render(const LPD3DXSPRITE& sprite)
+void Game::render()
 {
+    GraphicsManager::getInstance().BeginRender();
+
     std::set<Entity_ptr>::iterator iter = background.begin();
     for (; iter != background.end(); ++iter)
     {
-        (*iter)->Render(sprite);
+        (*iter)->Render();
     }
 
     iter = gameobjectlist.begin();
     for (; iter != gameobjectlist.end(); ++iter)
     {
-        (*iter)->Render(sprite);
+        (*iter)->Render();
     }
+
+    GraphicsManager::getInstance().EndRender();
 }
 
-void Game::loadMap(const std::string& mapName, const LPDIRECT3DDEVICE9& d3ddev)
+void Game::loadMap(const std::string& mapName)
 {
     // TEMP ****************************
     
     // manually adding stuff in the meantime
     Entity_ptr megaman(new PlayableCharacter);
-    megaman->Init(d3ddev, "MegaMan");
+    megaman->Init("MegaMan");
     megaman->SetPosition(32,-32);
     gameobjectlist.insert(megaman);
 
@@ -66,11 +71,10 @@ void Game::loadMap(const std::string& mapName, const LPDIRECT3DDEVICE9& d3ddev)
             int animOffset;
             *entree >> animOffset;
             Entity_ptr entity(new Entity);
-            entity->Init(d3ddev, mapName);
+            entity->Init(mapName);
             entity->SetPosition(j*16.0f, i*16.0f);
             entity->SetCurrentAnimation(animName, animOffset);
             background.insert(entity);
-            // OMG, c'est tellement laid
         }
     }
 

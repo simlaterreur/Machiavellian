@@ -68,21 +68,26 @@
     <ClCompile Include="animation.cpp" />
     <ClCompile Include="controlmanager.cpp" />
     <ClCompile Include="entity.cpp" />
+    <ClCompile Include="filesmanager.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="graphicsmanager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="playablecharacter.cpp" />
     <ClCompile Include="resources.cpp" />
     <ClCompile Include="resourcesmanager.cpp" />
+    <ClCompile Include="soundmanager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation.h" />
     <ClInclude Include="controlmanager.h" />
     <ClInclude Include="entity.h" />
+    <ClInclude Include="filesmanager.h" />
     <ClInclude Include="game.h" />
-    <ClInclude Include="main.h" />
+    <ClInclude Include="graphicsmanager.h" />
     <ClInclude Include="playablecharacter.h" />
     <ClInclude Include="resourcesmanager.h" />
     <ClInclude Include="resources.h" />
+    <ClInclude Include="soundmanager.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

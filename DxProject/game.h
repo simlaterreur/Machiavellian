@@ -11,9 +11,9 @@ public:
     Game();
 
     void update(long int elapsed);
-    void render(const LPD3DXSPRITE&);
+    void render();
 
-    void loadMap(const std::string&, const LPDIRECT3DDEVICE9&); // TODO: remove d3ddevice
+    void loadMap(const std::string&);
 
 private:
 

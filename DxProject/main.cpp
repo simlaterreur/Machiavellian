@@ -1,13 +1,12 @@
-#include "main.h"
-#include "entity.h"
+// include the basic windows header files and the Direct3D header file
+#include <windows.h>
+#include <windowsx.h>
 #include "game.h"
 #include "controlmanager.h"
+#include "graphicsmanager.h"
 
-// global declarations
-LPDIRECT3D9 d3d;    // the pointer to our Direct3D interface
-LPDIRECT3DDEVICE9 d3ddev;    // the pointer to the device class
-LPD3DXSPRITE sprite;
-Game * game;
+// the WindowProc function prototype
+LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 // the entry point for any Windows program
 int WINAPI WinMain(HINSTANCE hInstance,
@@ -15,6 +14,10 @@ int WINAPI WinMain(HINSTANCE hInstance,
                    LPSTR lpCmdLine,
                    int nCmdShow)
 {
+
+    // TODO: init files manager
+
+    // create window
     HWND hWnd;
     WNDCLASSEX wc;
 
@@ -43,22 +46,17 @@ int WINAPI WinMain(HINSTANCE hInstance,
 
     ShowWindow(hWnd, nCmdShow);
 
-    // set up and initialize Direct3D
-    initD3D(hWnd);
-
-    // **************************************************
-    sprite = NULL;
-    D3DXCreateSprite(d3ddev, &sprite);
+    // init the graphics manager and attach it to the window
+    GraphicsManager::getInstance().Init(hWnd);
     
+    // init the control manager and link it to the application window
     ControlManager::getInstance().Init(hInstance, hWnd);
 
-    game = new Game();
-    game->loadMap("Gym", d3ddev);
-
-    // **************************************************
+    // init Game
+    Game * game = new Game();
+    game->loadMap("Gym");  // TODO: pick the default map from the config file loaded by the files manager
 
     // enter the main loop:
-
     MSG msg;
 
     long int start = GetTickCount();
@@ -77,16 +75,16 @@ int WINAPI WinMain(HINSTANCE hInstance,
         long int elapsed = end - start;
 
         game->update(elapsed);
-
-        render_frame();
+        game->render();
 
         start = end;
     }
 
-    // clean up DirectX and COM
-    cleanD3D();
 
+    // clean up before quitting
     ControlManager::getInstance().Release();
+    GraphicsManager::getInstance().Release();
+
     delete game;
 
     return msg.wParam;
@@ -106,61 +104,4 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
     }
 
     return DefWindowProc (hWnd, message, wParam, lParam);
-}
-
-
-// this function initializes and prepares Direct3D for use
-void initD3D(HWND hWnd)
-{
-    d3d = Direct3DCreate9(D3D_SDK_VERSION);    // create the Direct3D interface
-
-    D3DPRESENT_PARAMETERS d3dpp;    // create a struct to hold various device information
-
-    ZeroMemory(&d3dpp, sizeof(d3dpp));    // clear out the struct for use
-    d3dpp.Windowed = TRUE;    // program windowed, not fullscreen
-    d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;    // discard old frames
-    d3dpp.hDeviceWindow = hWnd;    // set the window to be used by Direct3D
-
-
-    // create a device class using this information and the info from the d3dpp stuct
-    d3d->CreateDevice(D3DADAPTER_DEFAULT,
-                      D3DDEVTYPE_HAL,
-                      hWnd,
-                      D3DCREATE_SOFTWARE_VERTEXPROCESSING,
-                      &d3dpp,
-                      &d3ddev);
-}
-
-
-// this is the function used to render a single frame
-
-// TODO: refactor
-void render_frame(void)
-{
-
-    // clear the window to a deep blue
-    d3ddev->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 40, 100), 1.0f, 0);
-
-    d3ddev->BeginScene();    // begins the 3D scene
-
-    // do 3D rendering on the back buffer here
-
-    sprite->Begin(D3DXSPRITE_ALPHABLEND);
-    
-    // render all gameplay objects
-    game->render(sprite);
-
-    sprite->End();
-
-    d3ddev->EndScene();    // ends the 3D scene
-
-    d3ddev->Present(NULL, NULL, NULL, NULL);   // displays the created frame on the screen
-}
-
-
-// this is the function that cleans up Direct3D and COM
-void cleanD3D(void)
-{
-    d3ddev->Release();    // close and release the 3D device
-    d3d->Release();    // close and release Direct3D
 }
